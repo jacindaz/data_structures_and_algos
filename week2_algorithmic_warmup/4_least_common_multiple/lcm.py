@@ -13,3 +13,18 @@ if __name__ == '__main__':
     a, b = map(int, input.split())
     print(lcm_naive(a, b))
 
+def euclidean(a,b):
+    if b == 0:
+        return a
+
+    remainder = float(a) % float(b)
+    return euclidean(b, remainder)
+
+def lcm(a,b):
+    gcd = euclidean(a,b)
+    return (a*b)/gcd
+
+# lcm_naive(28851538, 1183019)
+lcm(28851538, 1183019)
+# euclidean(28851538,1183019)
+
