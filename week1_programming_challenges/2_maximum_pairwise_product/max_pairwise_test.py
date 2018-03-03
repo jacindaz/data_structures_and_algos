@@ -16,12 +16,13 @@ class TestStringMethods(unittest.TestCase):
     def test_zero(self):
         self.assertEqual(max_pairwise([1,0]), 0)
         self.assertEqual(max_pairwise([-1,0]), 0)
-        self.assertEqual(max_pairwise([0,-2,-1,0]), 0)
+        self.assertEqual(max_pairwise([0,-2,-1,0]), 2)
 
     def test_dupes(self):
         self.assertEqual(max_pairwise([3,9,3,7]), 63)
         self.assertEqual(max_pairwise([2,2,1]), 4)
 
     def test_negatives(self):
-        self.assertEqual(max_pairwise([-9, -2, -7]), 14)
-        self.assertEqual(max_pairwise([-9, -2, -2]), 4)
+        self.assertEqual(max_pairwise([-9, -2, -7]), 18)
+        self.assertEqual(max_pairwise([-9, -2, -2]), 18)
+        self.assertEqual(max_pairwise([-9, -8, -7]), 72)
