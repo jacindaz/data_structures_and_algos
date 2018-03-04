@@ -23,6 +23,6 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(max_pairwise([2,2,1]), 4)
 
     def test_negatives(self):
-        self.assertEqual(max_pairwise([-9, -2, -7]), 18)
+        self.assertEqual(max_pairwise([-9, -2, -7]), 63)
         self.assertEqual(max_pairwise([-9, -2, -2]), 18)
         self.assertEqual(max_pairwise([-9, -8, -7]), 72)
