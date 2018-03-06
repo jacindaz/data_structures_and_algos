@@ -44,5 +44,5 @@ def find_pisano_period(fibonacci_num, mod):
     return pisano_period
 
 def fibonacci_huge(fibonacci_num, mod):
-    remainder = fibonacci_num % len(find_pisano_period)
-    return remainder % mod
+    remainder = fibonacci_num % len(find_pisano_period(fibonacci_num, mod))
+    return int(find_pisano_period(remainder, mod)[-1])

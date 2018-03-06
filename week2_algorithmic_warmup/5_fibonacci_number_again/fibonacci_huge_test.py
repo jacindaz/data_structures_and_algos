@@ -46,3 +46,15 @@ class TestFibonacciHuge(unittest.TestCase):
         for modulo, expected_period_length in lengths.items():
             pisano_period = find_pisano_period(random_fibonacci_n, modulo)
             self.assertEqual(len(pisano_period), expected_period_length)
+
+    def test_fibonacci_huge(self):
+        expected_results = [
+            { 'fib': 2015, 'mod': 3, 'result': 1 },
+            { 'fib': 239, 'mod': 1000, 'result': 161 },
+            # { 'fib': 2816213588, 'mod': 30524, 'result': 10249 }
+        ]
+        random_fibonacci_n = 500
+
+        for expected_result in expected_results:
+            results = fibonacci_huge(expected_result['fib'], expected_result['mod'])
+            self.assertEqual(results, expected_result['result'])
