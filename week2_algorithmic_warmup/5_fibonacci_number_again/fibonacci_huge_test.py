@@ -1,8 +1,9 @@
 import unittest
 from fibonacci_huge import fibonacci_huge
+from fibonacci_huge import find_pisano_period
 import pdb
 
-class TestStringMethods(unittest.TestCase):
+class TestFibonacciHuge(unittest.TestCase):
     PERIOD_LENGTHS = {
         2: 3, 3: 8, 4: 6, 5: 20,
         6: 24, 7: 16, 8: 12, 9: 24, 10: 60,
@@ -24,14 +25,14 @@ class TestStringMethods(unittest.TestCase):
         random_fibonacci_n = 500
 
         for modulo, expected_period_length in self.PERIOD_LENGTHS.items():
-            pisano_period = fibonacci_huge(random_fibonacci_n, modulo)
+            pisano_period = find_pisano_period(random_fibonacci_n, modulo)
             self.assertEqual(len(pisano_period), expected_period_length)
 
     def test_period_values(self):
         random_fibonacci_n = 500
 
         for modulo, expected_period_value in self.PERIOD_VALUES.items():
-            pisano_period = fibonacci_huge(random_fibonacci_n, modulo)
+            pisano_period = find_pisano_period(random_fibonacci_n, modulo)
             self.assertEqual(''.join(pisano_period), expected_period_value)
 
     def test_larger_peroid_lengths(self):
@@ -43,5 +44,5 @@ class TestStringMethods(unittest.TestCase):
         random_fibonacci_n = 500
 
         for modulo, expected_period_length in lengths.items():
-            pisano_period = fibonacci_huge(random_fibonacci_n, modulo)
+            pisano_period = find_pisano_period(random_fibonacci_n, modulo)
             self.assertEqual(len(pisano_period), expected_period_length)

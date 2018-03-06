@@ -23,55 +23,26 @@ def fibonacci(n):
     results = [0, 1]
     index = 2
 
-    for x in range(2,n):
+    for x in range(2,n+1):
         sum = results[index-1] + results[index-2]
         results.append(sum)
         index += 1
 
     return results
 
-def fibonacci_huge(fibonacci_num, mod):
-    # calculate period of n % m
-    #  => since a new period always starts with 011
-    #  => that's how we know that a period is complete
-    # then look at length of the period
-    # n/(length of period), remainder
-    #
-    # Example: F2015 mod 3
-    # period for Fi mod 3 is length 8
-    # 2015/8 => (251*8) + 7
-    # F2015 mod 3 = F7 mod 3 = 1.
-    #
-    # (future optimization later):
-    # keep track of length, don't need to store actual period
-
-    # calculate fibonacci
+def find_pisano_period(fibonacci_num, mod):
     fibo = fibonacci(fibonacci_num)
-
-    # calculate period of n % m
-    # F(i) mod 2 0 1 1 0 1 1 0 1 1 0 1 1 0 1 1 0
-    pisano_period = []  # { }
+    pisano_period = []
     for f in fibo:
         mod_result = f % mod
         pisano_period.append(str(mod_result))
 
-        # print(f'\nmod_result: {mod_result} \t\tf: {f} \t\tmod: {mod}')
-        # print(f'pisano_period: {pisano_period}\n')
-
-        # stop checking if period contains pattern "011"
         if (len(pisano_period) > 3 and pisano_period[-3:] == ['0', '1', '1']) == True:
-            return pisano_period[0:-3]
+            pisano_period = pisano_period[0:-3]
+            break
 
-    # print('\n==================')
-    # print(f'mod: {mod}')
-    # print(f'fibonacci_num: {fibonacci_num}')
-    # print('==================\n')
+    return pisano_period
 
-    # print('\n==================')
-    # print(f'pisano_period: {pisano_period}')
-    # print(f'pisano_period length: {len(pisano_period)}')
-    # print('==================\n')
-    # return pisano_period
-
-
-# print(fibonacci_huge(239, 10))
+def fibonacci_huge(fibonacci_num, mod):
+    remainder = fibonacci_num % len(find_pisano_period)
+    return remainder % mod
