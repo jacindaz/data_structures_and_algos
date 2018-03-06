@@ -5,6 +5,10 @@ import pdb
 class TestFibonacciHuge(unittest.TestCase):
     def test_fibonacci(self):
         fib_values = {
+            0: 0,
+            1: 1,
+            2: 1,
+            3: 2,
             10: 55,
             17: 1597,
             43: 433494437,
