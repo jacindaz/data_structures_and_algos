@@ -30,19 +30,40 @@ def fibonacci(n):
 
     return results
 
-def find_pisano_period(fibonacci_num, mod):
+def find_pisano_period_length(fibonacci_num, mod):
     fibo = fibonacci(fibonacci_num)
     pisano_period = []
-    for f in fibo:
-        mod_result = f % mod
-        pisano_period.append(str(mod_result))
+    pisano_period_length = 0
+    num_times_seen_011 = 0
 
-        if (len(pisano_period) > 3 and pisano_period[-3:] == ['0', '1', '1']) == True:
-            pisano_period = pisano_period[0:-3]
-            break
+    if pisano_period == ['0', '1', '1']:
+        num_times_seen_011 += 1
 
-    return pisano_period
+    index = 0
+    while pisano_period != ['0', '1', '1'] and num_times_seen_011 < 2:
+        mod_result = fibonacci(index)[-1] % mod
+
+        if len(pisano_period) == 3:
+            pisano_period.append(str(mod_result))
+            pisano_period = pisano_period[-3:]
+        else:
+            pisano_period.append(str(mod_result))
+
+        pisano_period_length += 1
+        index += 1
+
+    pisano_period = pisano_period[0:-3]
+    pisano_period_length -= 3
+
+    return pisano_period_length
 
 def fibonacci_huge(fibonacci_num, mod):
-    remainder = fibonacci_num % len(find_pisano_period(fibonacci_num, mod))
-    return int(find_pisano_period(remainder, mod)[-1])
+    pisano_length = find_pisano_period_length(fibonacci_num, mod)
+    remainder = fibonacci_num % pisano_length
+    fib_remainder = fibonacci(remainder)[-1]
+
+    return fib_remainder % mod
+
+# print(find_pisano_period_length(10, 3))
+# print(fibonacci_huge(239, 1000))
+# print(fibonacci_huge(2816213588, 30524)) # 10249
