@@ -1,4 +1,6 @@
 # Uses python3
+import sys
+
 def calc_fib(n):
     if (n <= 1):
         return n
@@ -18,3 +20,8 @@ def fibonacci(n):
             index += 1
 
     return results[-1]
+
+if __name__ == '__main__':
+    input = sys.stdin.read()
+    n = int(input)
+    print(fibonacci(n))
