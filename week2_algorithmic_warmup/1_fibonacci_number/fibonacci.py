@@ -9,13 +9,9 @@ def fibonacci(n):
     results = [0, 1]
     index = 2
 
-    for x in range(2,n):
-        print(f'\nn: {n}\t\t results[index-1]: {results[index-1]}\t\t results[index-2]: {results[index-2]}')
-
+    for x in range(2,n+1):
         sum = results[index-1] + results[index-2]
-        print(f'sum: {sum} \t\tresults: {results}')
-
         results.append(sum)
         index += 1
 
-fibonacci(7)
+    return results[-1]
