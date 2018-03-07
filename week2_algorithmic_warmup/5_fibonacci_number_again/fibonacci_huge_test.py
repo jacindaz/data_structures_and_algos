@@ -44,7 +44,7 @@ class TestFibonacciHuge(unittest.TestCase):
         expected_results = [
             { 'fib': 2015, 'mod': 3, 'result': 1 },
             { 'fib': 239, 'mod': 1000, 'result': 161 },
-            # { 'fib': 2816213588, 'mod': 30524, 'result': 10249 }
+            { 'fib': 2816213588, 'mod': 30524, 'result': 10249 }
         ]
         random_fibonacci_n = 500
 
