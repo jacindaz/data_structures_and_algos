@@ -10,17 +10,14 @@ def gcd_naive(a, b):
 
     return current_gcd
 
+def euclidean(a,b):
+    if b == 0:
+        return a
+
+    remainder = a % b
+    return euclidean(b, remainder)
+
 if __name__ == "__main__":
     input = sys.stdin.read()
     a, b = map(int, input.split())
-    print(gcd_naive(a, b))
-
-def euclidean(a,b):
-    if b == 0:
-        print(a)
-        return a
-
-    remainder = float(a) % float(b)
-    return euclidean(b, remainder)
-
-print(euclidean(28851538,1183019))
+    print(euclidean(a, b))

@@ -13,13 +13,6 @@ def get_fibonacci_last_digit_naive(n):
 
     return current % 10
 
-# if __name__ == '__main__':
-#     input = sys.stdin.read()
-#     n = int(input)
-#     print(get_fibonacci_last_digit_naive(n))
-
-# print(get_fibonacci_last_digit_naive(331))
-
 def better_solution(n):
     results = [1]
     index = 1
@@ -31,4 +24,7 @@ def better_solution(n):
 
     return results[-1]
 
-print(better_solution(327305))
+if __name__ == '__main__':
+    input = sys.stdin.read()
+    n = int(input)
+    print(better_solution(n))
