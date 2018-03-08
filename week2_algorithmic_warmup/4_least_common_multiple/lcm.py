@@ -8,23 +8,18 @@ def lcm_naive(a, b):
 
     return a*b
 
-if __name__ == '__main__':
-    input = sys.stdin.read()
-    a, b = map(int, input.split())
-    print(lcm_naive(a, b))
-
 def euclidean(a,b):
     if b == 0:
         return a
 
-    remainder = float(a) % float(b)
+    remainder = a % b
     return euclidean(b, remainder)
 
 def lcm(a,b):
     gcd = euclidean(a,b)
-    return (a*b)/gcd
+    return (a*b)//gcd
 
-# lcm_naive(28851538, 1183019)
-lcm(28851538, 1183019)
-# euclidean(28851538,1183019)
-
+if __name__ == '__main__':
+    input = sys.stdin.read()
+    a, b = map(int, input.split())
+    print(lcm(a, b))
