@@ -46,24 +46,37 @@ def find_pisano_period_length(mod):
             fib_2 = fib_1
             fib_1 = new_fib
 
-            print_things(remainder, pisano_1, pisano_2, pisano_length, fib_1, fib_2)
+            # print_things(remainder, pisano_1, pisano_2, pisano_length, fib_1, fib_2)
 
     return pisano_length
 
 # print(find_pisano_period_length(3)) # 8
 # print(find_pisano_period_length(1975)) # 3900
+# print(find_pisano_period_length(2000)) # 3000
 
+def fibonacci(n):
+    if n == 0:
+        return 0
+    else:
+        results = [0, 1]
+        index = 2
+
+        for x in range(2,n+1):
+            sum = results[index-1] + results[index-2]
+            results.append(sum)
+            index += 1
+
+    return results[-1]
 
 def fibonacci_huge(fibonacci_num, mod):
-    pisano_length = find_pisano_period_length(fibonacci_num, mod)
+    pisano_length = find_pisano_period_length(mod)
 
     remainder = fibonacci_num % pisano_length
-    fib_remainder = fibonacci(remainder)[-1]
+    fib_remainder = fibonacci(remainder)
 
     return fib_remainder % mod
 
-# print(find_pisano_period_length(10, 3)) # 1
-# print(fibonacci_huge(10, 3))
+# print(fibonacci_huge(2015, 3)) # 1
 # print(fibonacci_huge(239, 1000)) # 161
 # print(fibonacci_huge(2816213588, 30524)) # 10249
 
