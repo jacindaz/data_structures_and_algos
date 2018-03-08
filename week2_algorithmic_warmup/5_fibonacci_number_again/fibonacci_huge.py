@@ -14,51 +14,49 @@ def get_fibonacci_huge_naive(n, m):
 
     return current % m
 
-def fibonacci(n):
-    if n == 0:
-        return [0]
-    else:
-        results = [0, 1]
-        index = 2
+def print_things(remainder, pisano_1, pisano_2, pisano_period_length, fib_1, fib_2):
+    print('\n------------------------------')
+    print(f'remainder: {remainder}')
+    print(f'pisano_1: {pisano_1}, pisano_2: {pisano_2}')
+    print(f'pisano_period_length: {pisano_period_length}\n\n')
+    print(f'fib_1: {fib_1}, fib_2: {fib_2}')
+    print('------------------------------\n')
 
-        for x in range(2,n+1):
-            sum = results[index-1] + results[index-2]
-            results.append(sum)
-            index += 1
+def find_pisano_period_length(mod):
+    pisano_1 = '0'
+    pisano_2 = '0'
+    fib_1 = 0
+    fib_2 = 1
+    pisano_length = 0
 
-    return results
+    done = False
 
-def find_pisano_period_length(fibonacci_num, mod):
-    pisano_period = []
-    pisano_period_length = 0
-    num_times_seen_011 = 0
-
-    index = 0
-    while num_times_seen_011 < 2:
-        if pisano_period == ['0', '1', '1']:
-            num_times_seen_011 += 1
-
-        if num_times_seen_011 == 2:
-            break
-
-        mod_result = fibonacci(index)[-1] % mod
-
-        if len(pisano_period) == 3:
-            pisano_period.append(str(mod_result))
-            pisano_period = pisano_period[-3:]
+    while done == False:
+        if (pisano_1 == '0' and pisano_2 == '1') == True:
+            done = True
+            pisano_length -= 1
         else:
-            pisano_period.append(str(mod_result))
+            remainder = fib_1 % mod
+            pisano_2 = pisano_1
+            pisano_1 = str(remainder)
 
-        pisano_period_length += 1
-        index += 1
+            pisano_length += 1
 
-    pisano_period = pisano_period[0:-3]
-    pisano_period_length -= 3
+            new_fib = fib_1 + fib_2
+            fib_2 = fib_1
+            fib_1 = new_fib
 
-    return pisano_period_length
+            print_things(remainder, pisano_1, pisano_2, pisano_length, fib_1, fib_2)
+
+    return pisano_length
+
+# print(find_pisano_period_length(3)) # 8
+# print(find_pisano_period_length(1975)) # 3900
+
 
 def fibonacci_huge(fibonacci_num, mod):
     pisano_length = find_pisano_period_length(fibonacci_num, mod)
+
     remainder = fibonacci_num % pisano_length
     fib_remainder = fibonacci(remainder)[-1]
 
@@ -68,6 +66,9 @@ def fibonacci_huge(fibonacci_num, mod):
 # print(fibonacci_huge(10, 3))
 # print(fibonacci_huge(239, 1000)) # 161
 # print(fibonacci_huge(2816213588, 30524)) # 10249
+
+# print(find_pisano_period_length(100, 100000))
+# print(fibonacci_huge(100, 100000)) #
 
 # if __name__ == '__main__':
 #     input = sys.stdin.read();
