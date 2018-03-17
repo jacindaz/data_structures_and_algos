@@ -1,15 +1,25 @@
 # Uses python3
 import sys
 
-def binary_search(a, x):
-    left, right = 0, len(a)
-    # write your code here
+def binary_search(sorted_numbers, number):
+    result = -1
 
-def linear_search(a, x):
-    for i in range(len(a)):
-        if a[i] == x:
-            return i
-    return -1
+    low, high = 0, len(sorted_numbers)-1
+    key_not_found = True
+
+    while low <= high:
+        midpoint = low + ((high - low) // 2)
+        number_at_midpoint = sorted_numbers[midpoint]
+
+        if number_at_midpoint < number:
+            low = midpoint + 1
+        elif number_at_midpoint > number:
+            high = midpoint - 1
+        elif number_at_midpoint == number:
+            result = midpoint
+            break
+
+    return result
 
 if __name__ == '__main__':
     input = sys.stdin.read()
@@ -18,5 +28,4 @@ if __name__ == '__main__':
     m = data[n + 1]
     a = data[1 : n + 1]
     for x in data[n + 2:]:
-        # replace with the call to binary_search when implemented
-        print(linear_search(a, x), end = ' ')
+        print(binary_search(a, x), end = ' ')
