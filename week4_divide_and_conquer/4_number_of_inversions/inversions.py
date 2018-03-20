@@ -1,40 +1,6 @@
 # Uses python3
 import sys
 
-# def get_number_of_inversions(a, b, left, right):
-#     number_of_inversions = 0
-#     if right - left <= 1:
-#         return number_of_inversions
-#     ave = (left + right) // 2
-#     number_of_inversions += get_number_of_inversions(a, b, left, ave)
-#     number_of_inversions += get_number_of_inversions(a, b, ave, right)
-#     #write your code here
-#     return number_of_inversions
-
-# the prompt asks for:
-# def Merge(B, C)
-# def Mergesort(A)
-
-# if __name__ == '__main__':
-#     input = sys.stdin.read()
-#     n, *a = list(map(int, input.split()))
-#     b = n * [0]
-#     print(get_number_of_inversions(a, b, 0, len(a)))
-
-# Input:
-# 5
-# 2 3 9 2 9
-# Output:
-# 2
-
-# the prompt asks for:
-# def Mergesort(A)
-# def Merge(B, C)
-
-
-# SIMPLEST CASE:
-# merge these 2 arrays:
-#  => [38, 27] and [43, 3]
 def merge(array1, array2):
     merged_array = []
 
@@ -64,4 +30,20 @@ def merge(array1, array2):
     return merged_array
 
 # print(merge([27, 38], [3,43]))
-print(merge([3,27,38,43], [9,10,82]))
+# print(merge([3,27,38,43], [9,10,82]))
+
+
+def merge_sort(array_to_sort, index=0):
+    array_length = len(array_to_sort)
+
+    if array_length == 1:
+        return array_to_sort
+
+    midpoint = array_length//2
+    array_left_half = merge_sort(array_to_sort[:midpoint], index+1)
+    array_right_half = merge_sort(array_to_sort[midpoint:], index+1)
+    sorted_array = merge(array_left_half, array_right_half)
+
+    return sorted_array
+
+print(merge_sort([38,27,43,39,82,10]))
