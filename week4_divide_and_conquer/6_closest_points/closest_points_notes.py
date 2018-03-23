@@ -40,6 +40,13 @@ def naive_minimum_distance(x_coords, y_coords):
 # print(naive_minimum_distance([7,1,4,7], [7,100,8,7]))
 
 def fast_minimum_distance(x_coords, y_coords):
+    # naive algorithm:
+    #  => keep track of minimum distance
+    #  => O(n^2)
+    #  => multiple every x and y coordinate
+    print(f'x_coords: {x_coords}, y_coords: {y_coords}')
+
+    # change to points
     points = []
     for i in range(len(x_coords)):
         points.append((x_coords[i], y_coords[i]))
@@ -60,6 +67,15 @@ def fast_minimum_distance(x_coords, y_coords):
 
 print(minimum_distance([7,1,4,7], [7,100,8,7]))
 
+
+# if __name__ == '__main__':
+#     input = sys.stdin.read()
+#     data = list(map(int, input.split()))
+#     n = data[0]
+#     x = data[1::2]
+#     y = data[2::2]
+#     print(minimum_distance(x,y))
+    # print("{0:.9f}".format(minimum_distance(x, y)))
 
 # Input:
 # 2
