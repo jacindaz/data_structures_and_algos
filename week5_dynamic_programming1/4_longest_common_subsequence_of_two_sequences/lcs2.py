@@ -1,4 +1,4 @@
-#Uses python3
+# Uses python3
 import sys
 from random import *
 
@@ -8,7 +8,6 @@ def brute_force(s1, s2, i, j):
     if(s1[i] == s2[j]):
         return 1 + brute_force(s1, s2, i-1, j-1)
     return max(brute_force(s1, s2, i-1, j), brute_force(s1, s2, i, j-1))
-
 
 # string1, string2 = [[2,7,5], [2,5]] # 2
 # string1, string2 = [[2,7,8,3], [5,2,8,7,3]] # 3
@@ -71,9 +70,6 @@ def stress_testing_random_input():
 
 # print(stress_testing_random_input())
 
-
-
-
 def starter_grid_x(sequence1_x, sequence2_y):
     grid = []
     y_index = 0
@@ -88,11 +84,16 @@ def starter_grid_x(sequence1_x, sequence2_y):
                 grid.append([0])
         else:
             previous_number = grid[y_index][x_index-1]
-            grid[y_index].append(previous_number)
+
+            if seq1_x_number == seq2_y_number:
+                grid[y_index].append(1)
+            else:
+                grid[y_index].append(previous_number)
 
     return grid
 
 # print(starter_grid_x([2,1,3,3,2], [2,5,2,2,3]))
+# print(starter_grid_x([16,49,19,16,9,21,8,31,35,34],[34]))
 
 def starter_grid(sequence1_x, sequence2_y):
     grid = starter_grid_x(sequence1_x, sequence2_y)
@@ -107,7 +108,7 @@ def starter_grid(sequence1_x, sequence2_y):
             grid.append([1])
         else:
             if seq1_x_number == seq2_y_number:
-                grid.append([previous_number+1])
+                grid.append([1])
             else:
                 grid.append([previous_number])
 
@@ -115,6 +116,8 @@ def starter_grid(sequence1_x, sequence2_y):
 # print(starter_grid([2,1,3,3,2], [2,5,2,2,3]))
 # print(starter_grid([1,3,2], [2,5,2,2,3])) # 1
 # print(starter_grid([5,3,2], [2,5,2,2,3])) # 2
+# print(starter_grid([18,23,12,4,46,14,32,35,9,47,4,19,16,16,4,39,15,4], [4,4,4]))
+# print(starter_grid([4,4,4], [18,23,4,46,4,4,15,4]))
 
 
 def construct_full_matrix(sequence1_x, sequence2_y):
@@ -144,6 +147,26 @@ def construct_full_matrix(sequence1_x, sequence2_y):
 # print(construct_full_matrix([2,1,3,3,2], [2,5,2,2,3])) # 2
 # print(construct_full_matrix([1,3,2], [2,5,2,2,3])) # 1
 # print(construct_full_matrix([5,3,2], [2,5,2,2,3])) # 2
+# print(construct_full_matrix([16,49,19,16,9,21,8,31,35,34],[34]))
+
+# START HERE
+#  => these two return different results... why???
+# print(construct_full_matrix([4,4,4],[18,23,12,4,46,14,32,35,9,47,4,19,16,16,4,39,15,4]))
+# print(construct_full_matrix([18,23,12,4,46,14,32,35,9,47,4,19,16,16,4,39,15,4], [4,4,4]))
+
+# print(construct_full_matrix([18,23,4,46,4,4,15,4], [4,4,4]))
+
+# print(construct_full_matrix([4,4,4], [18,23,4,46,4,4,15,4]))
+# [
+#     [0, 0, 0],
+#     [0, 0, 0],
+#     [1, 1, 1],
+#     [1, 1, 1],
+#     [2, 2, 2],
+#     [3, 3, 3],
+#     [3, 3, 3],
+#     [4, 4, 4]
+# ]
 
 
 def lcs2(seq1, seq2):
@@ -151,23 +174,33 @@ def lcs2(seq1, seq2):
     result = grid[-1][-1]
     return result
 
-
 # print(lcs2([2,7,5], [2,5])) # 2
 # print(lcs2([2,7,8,3], [5,2,8,7,3])) # 3
 # print(lcs2([7], [1,2,3,4])) # 0
 # print(lcs2([1,2,3,4], [5,6,7,10,2,2,2,2,3])) # 2
 # print(lcs2([1,2,2,2,6], [5,6,7,10,2,2,2,2,3])) # 3
 # print(lcs2([2,1,3,3,2], [2,5,2,2,3])) # 2
+# print(lcs2([16,49,19,16,9,21,8,31,35,34],[34]))
 
-for n in range(1,20):
-    seq1, seq2 = stress_testing_random_input()
 
-    brute_force_result = brute_force(seq1, seq2, len(seq1)-1, len(seq2)-1)
-    optimized_result = lcs2(seq1, seq2)
-
-    if brute_force_result != optimized_result:
+def run_stress_test(num_iterations):
+    for n in range(1,num_iterations):
         print('----------------------')
-        print('does not match!!!')
-        print(f'brute_force_result: {brute_force_result} \toptimized_result: {optimized_result}')
+
+        seq1, seq2 = stress_testing_random_input()
         print(f'seq1: {seq1}')
         print(f'seq2: {seq2}')
+
+        if len(seq1) == 0 or len(seq2) == 0:
+            next
+        else:
+            brute_force_result = brute_force(seq1, seq2, len(seq1)-1, len(seq2)-1)
+            optimized_result = lcs2(seq1, seq2)
+
+            if brute_force_result != optimized_result:
+                print('\e[1;31mdoes not match!!!\e[1;31m')
+                print(f'brute_force_result: {brute_force_result} \toptimized_result: {optimized_result}')
+                print(f'seq1: {seq1}')
+                print(f'seq2: {seq2}')
+
+run_stress_test(20)
