@@ -1,6 +1,26 @@
 #Uses python3
 import sys
 
+
+def brute_force(s1, s2, i, j):
+    if(i == -1 or j == -1):
+        return 0
+    if(s1[i] == s2[j]):
+        return 1 + LCS(s1, s2, i-1, j-1)
+    return max(LCS(s1, s2, i-1, j), LCS(s1, s2, i, j-1))
+
+
+# string1, string2 = [[2,7,5], [2,5]] # 2
+# string1, string2 = [[2,7,8,3], [5,2,8,7,3]] # 3
+# string1, string2 = [[7], [1,2,3,4]] # 0
+# string1, string2 = [[1,2,3,4], [5,6,7,10,2,2,2,2,3]] # 2
+# string1, string2 = [[2,1,3,3,2], [2,5,2,2,3]] # 2
+# string1, string2 = [[1,2,2,2,6], [5,6,7,10,2,2,2,2,3]] # 3
+# print(LCS(string1, string2, len(string1)-1, len(string2)-1))
+# print(lcs2([1,2,2,2,6], [5,6,7,10,2,2,2,2,3])) # 3
+
+
+
 def starter_grid_x(sequence1_x, sequence2_y):
     grid = []
     y_index = 0
@@ -83,4 +103,6 @@ def lcs2(seq1, seq2):
 # print(lcs2([2,7,8,3], [5,2,8,7,3])) # 3
 # print(lcs2([7], [1,2,3,4])) # 0
 # print(lcs2([1,2,3,4], [5,6,7,10,2,2,2,2,3])) # 2
+# print(lcs2([1,2,2,2,6], [5,6,7,10,2,2,2,2,3])) # 3
 # print(lcs2([2,1,3,3,2], [2,5,2,2,3])) # 2
+
