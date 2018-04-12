@@ -16,12 +16,12 @@ def optimal_weight(max_capacity, items):
             previous_item_weight = weights[prev_item_index]
             previous_item_value = values[prev_item_index]
 
-            value_above = max_capacities_grid[prev_item_index][capacity]
+            max_capacity_one_less_item = max_capacities_grid[prev_item_index][capacity]
             if previous_item_weight <= capacity:
                 part1 = max_capacities_grid[prev_item_index][capacity-previous_item_weight]
-                max_capacities_grid[item_index][capacity] = max(previous_item_value + part1, value_above)
+                max_capacities_grid[item_index][capacity] = max(previous_item_value + part1, max_capacity_one_less_item)
             else:
-                max_capacities_grid[item_index][capacity] = value_above
+                max_capacities_grid[item_index][capacity] = max_capacity_one_less_item
 
     return max_capacities_grid[num_items][max_capacity]
 
